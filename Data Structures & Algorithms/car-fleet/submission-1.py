@@ -1,0 +1,11 @@
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        pair = [[p, s] for p, s in zip(position, speed)]
+        stack = []
+
+        for p, s in sorted(pair)[::-1]:# reversed sorted order
+            stack.append((target - p) / s)
+            if len(stack) >= 2 and stack[-1] <= stack[-2]:
+                # not need for while,because it is impossible to colide with some before, also don't forget the =
+                stack.pop()
+        return len(stack)
